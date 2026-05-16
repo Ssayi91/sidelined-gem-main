@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply bg-cream text-charcoal antialiased;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply min-h-screen font-sans leading-relaxed;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif font-medium tracking-tight;
+  }
+  /* Parallax Background Container */
+.parallax-bg {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Ambient Motion: Slow fade-up reveal */
+@keyframes ambientReveal {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal-slow {
+  animation: ambientReveal 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: 0.3s;
+  opacity: 0; /* Prevents flash before animation starts */
+}
+
+.reveal-medium {
+  animation: ambientReveal 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: 0.6s;
+  opacity: 0;
+}
+
+.reveal-fast {
+  animation: ambientReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: 0.9s;
+  opacity: 0;
+}
+
+/* Mobile fallback: disable fixed parallax for performance */
+@media (max-width: 768px) {
+  .parallax-bg {
+    background-attachment: scroll;
+  }
+}
+}
