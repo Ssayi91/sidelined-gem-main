@@ -18,7 +18,7 @@ const RESEARCH_THEMES_QUERY = `*[_type == "researchFocus" && published == true][
 }`;
 
 const BLOG_QUERY = `*[_type == "blogPost" && published == true] | order(publishedAt desc)[0...3]{
-  id,
+  _id,
   title,
   "slug": slug.current,
   excerpt,
@@ -336,7 +336,7 @@ export default async function Home() {
       {/* Snippet Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {blogs.map((post: any) => (
-          <article key={post.id} className="group bg-cream border-2 border-charcoal hover:border-lime transition-colors flex flex-col h-full">
+          <article key={post._id} className="group bg-cream border-2 border-charcoal hover:border-lime transition-colors flex flex-col h-full">
             {/* Image Panel */}
             {post.featuredImage?.asset?.url && (
               <div className="relative aspect-[16/10] overflow-hidden border-b-2 border-charcoal">

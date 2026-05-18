@@ -8,6 +8,8 @@ import { contactSection } from './contactSection'
 import { aboutPage } from './aboutPage'
 import { footer } from './footer'
 import { resource } from './resource'
+import { podcastMedia } from './podcastMedia'
+import { galleryItem } from './galleryItem'
 
 // To this (default export):
 export default [
@@ -20,4 +22,6 @@ export default [
   contactSection,
   footer,
   resource,
+  podcastMedia,
+  galleryItem,
 ]

@@ -1,3 +1,4 @@
+// Research Focus schema for Sanity CMS
 import {defineField, defineType} from 'sanity'
 
 export const researchFocus = defineType({
