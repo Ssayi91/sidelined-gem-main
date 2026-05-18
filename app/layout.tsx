@@ -27,10 +27,19 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // Detect current route on the server
+  // Server-side path detection
   const headersList = await headers();
-  const path = headersList.get("next-url") || "";
-  const isContact = path.includes("/contact");
+  const url = headersList.get("next-url") || "/";
+  let pathname = "/";
+  
+  try {
+    pathname = new URL(url, "http://localhost").pathname;
+  } catch (e) {
+    // Fallback if URL parsing fails
+    pathname = url.split("?")[0].split("#")[0];
+  }
+
+  const isContact = pathname === "/contact";
 
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
@@ -38,7 +47,7 @@ export default async function RootLayout({
         <Navbar />
         <main className="flex-grow">{children}</main>
         
-        {/* Footer hides automatically on /contact */}
+        {/* Conditionally render Footer based on server path */}
         {!isContact && <Footer />}
       </body>
     </html>
