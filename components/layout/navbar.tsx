@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image"; // ← Added import
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -27,14 +28,29 @@ export default function Navbar() {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-cream/95 backdrop-blur-sm border-b-2 border-charcoal">
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
         <div className="flex items-center justify-between h-20">
-          {/* Logo - Kept on top layer */}
+          
+          {/* Logo with Image + Text */}
           <Link
             href="/"
-            className="font-serif text-2xl tracking-tight text-charcoal hover:text-lime transition-colors z-50 relative"
+            className="flex items-center gap-3 z-50 relative group"
             onClick={closeMenu}
           >
-            The Sidelined Gem
-          </Link>
+            {/* Logo Image */}
+           {/* Logo Image - Always full color, no hover effect */}
+              <div className="relative w-10 h-10 md:w-12 md:h-12 flex-shrink-0">
+                <Image
+                  src="/logo.sideline.1.JPG"
+                  alt="The Sidelined Gem Logo"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
+                          {/* Site Name Text */}
+                          <span className="font-serif text-2xl tracking-tight text-charcoal group-hover:text-lime transition-colors">
+                            The Sidelined Gem
+                          </span>
+                        </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
@@ -67,12 +83,12 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu - Positioned BELOW the navbar (top-20) */}
+      {/* Mobile Menu */}
       <div
         className={`lg:hidden fixed left-0 right-0 z-40 bg-cream border-t-2 border-charcoal overflow-y-auto transition-all duration-300 ease-in-out ${
           isOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-full"
         }`}
-        style={{ top: "5rem" }} // 5rem = 80px height of navbar
+        style={{ top: "5rem" }}
       >
         <div className="flex flex-col px-6 py-8 gap-6 max-h-[calc(100vh-5rem)]">
           {navLinks.map((link) => (
